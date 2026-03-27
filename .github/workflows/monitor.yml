@@ -48,4 +48,5 @@ jobs:
 
           git add .
           git diff --cached --quiet || git commit -m "update: new items"
+          git commit --allow-empty -m "trigger schedule again"
           git push
