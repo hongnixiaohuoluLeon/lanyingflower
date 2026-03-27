@@ -2,8 +2,11 @@ name: monitor
 
 on:
   schedule:
-    - cron: "*/2 * * * *"   # 每2分钟跑一次
+    - cron: "*/2 * * * *"
   workflow_dispatch:
+
+permissions:
+  contents: write   # 👈 必须加这个！！！
 
 jobs:
   run:
