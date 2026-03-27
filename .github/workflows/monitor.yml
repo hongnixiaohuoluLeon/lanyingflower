@@ -1,0 +1,35 @@
+name: monitor
+
+on:
+  schedule:
+    - cron: "*/2 * * * *"   # 每2分钟跑一次
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 拉代码
+        uses: actions/checkout@v3
+
+      - name: 安装Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: 安装依赖
+        run: pip install requests beautifulsoup4
+
+      - name: 运行脚本
+        env:
+          WEBHOOK: ${{ secrets.WEBHOOK }}
+        run: python monitor.py
+
+      - name: 保存数据
+        run: |
+          git config user.name "bot"
+          git config user.email "bot@example.com"
+          git add data.json || true
+          git commit -m "update data" || true
+          git push
