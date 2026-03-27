@@ -2,7 +2,7 @@ name: monitor-new-items
 
 on:
   schedule:
-    - cron: "*/10 * * * *"   # 每10分钟跑一次（可改）
+    - cron: "* * * * *"   # 每1分钟跑一次
   workflow_dispatch:
 
 # ✅ 解决 push / checkout 权限问题（exit code 128 常见原因）
